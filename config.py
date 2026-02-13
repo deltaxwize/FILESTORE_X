@@ -1,6 +1,10 @@
 import os
 import logging
 from logging.handlers import RotatingFileHandler
+from dotenv import load_dotenv
+
+# Load environment variables from .env file
+load_dotenv()
 
 # ================= LOGGING =================
 LOG_FILE_NAME = "bot.log"
@@ -17,30 +21,30 @@ SHORT_TUT = os.getenv("SHORT_TUT", "https://t.me/How_to_Download_7x/26")
 # ================= TELEGRAM =================
 SESSION = os.getenv("SESSION", "yato")
 TOKEN = os.getenv("BOT_TOKEN")
-API_ID = int(os.getenv("API_ID"))
-API_HASH = os.getenv("API_HASH")
+API_ID = int(os.getenv("API_ID", "0"))  # default 0 to avoid crash if missing
+API_HASH = os.getenv("API_HASH", "")
 WORKERS = int(os.getenv("WORKERS", 5))
 
 # ================= DATABASE =================
-DB_URI = os.getenv("DB_URI")
+DB_URI = os.getenv("DB_URI", "")
 DB_NAME = os.getenv("DB_NAME", "yato")
+
+# ✅ FIXED — NO EMPTY VALUE
+DB_CHANNEL = int(os.getenv("DB_CHANNEL", "0"))  # default 0 to avoid crash
 
 # Force Subscribe Channels
 # format: [channel_id, request_enabled, timer_minutes]
 FSUBS = []
 
-# ✅ FIXED — NO EMPTY VALUE
-DB_CHANNEL = int(os.getenv("DB_CHANNEL"))
-
 # Auto delete (seconds)
 AUTO_DEL = int(os.getenv("AUTO_DEL", 300))
 
-# Admins
-ADMINS = list(map(int, os.getenv("ADMINS", "").split()))
+# Admins (space-separated IDs in .env)
+ADMINS = list(map(int, os.getenv("ADMINS", "").split())) if os.getenv("ADMINS") else []
 
 # Bot Settings
-DISABLE_BTN = os.getenv("DISABLE_BTN", "False") == "True"
-PROTECT = os.getenv("PROTECT", "False") == "True"
+DISABLE_BTN = os.getenv("DISABLE_BTN", "False").lower() == "true"
+PROTECT = os.getenv("PROTECT", "False").lower() == "true"
 
 # ================= MESSAGES =================
 MESSAGES = {
@@ -52,7 +56,7 @@ MESSAGES = {
     "START_PHOTO": "https://graph.org/file/510affa3d4b6c911c12e3.jpg",
     "FSUB_PHOTO": "https://telegra.ph/file/7a16ef7abae23bd238c82-b8fbdcb05422d71974.jpg",
     "SHORT_PIC": "https://telegra.ph/file/7a16ef7abae23bd238c82-b8fbdcb05422d71974.jpg",
-    "SHORT": "https://telegra.ph/file/8aaf4df8c138c6685dcee-05d3b183d4978ec347.jpg"
+    "SHORT": "https://telegra.ph/file/8aaf4df8c138c6685dcee-05d3b183d4978ec347.jpg",
 }
 
 # ================= LOGGER =================
