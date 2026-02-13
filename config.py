@@ -27,7 +27,7 @@ DB_NAME = os.getenv("DB_NAME", "yato")
 
 # Force Subscribe Channels
 # format: [channel_id, request_enabled, timer_minutes]
-FSUBS = [[-1002517849305, True, 10]]
+FSUBS = []
 
 # ✅ FIXED — NO EMPTY VALUE
 DB_CHANNEL = int(os.getenv("DB_CHANNEL"))
@@ -40,7 +40,7 @@ ADMINS = list(map(int, os.getenv("ADMINS", "").split()))
 
 # Bot Settings
 DISABLE_BTN = os.getenv("DISABLE_BTN", "False") == "True"
-PROTECT = os.getenv("PROTECT", "True") == "True"
+PROTECT = os.getenv("PROTECT", "False") == "True"
 
 # ================= MESSAGES =================
 MESSAGES = {
